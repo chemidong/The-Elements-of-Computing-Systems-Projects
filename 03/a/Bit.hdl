@@ -15,4 +15,8 @@ CHIP Bit {
 
     PARTS:
     // Put your code here:
+    Mux(a=loop, b=in, sel=load, out=inp);
+    //out pin can be connected to muliple pins in one chip definition
+    //don't need to add a chip to bus them
+    DFF(in=inp, out=loop, out=out);
 }
