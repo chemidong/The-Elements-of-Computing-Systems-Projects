@@ -16,5 +16,14 @@ CHIP PC {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    //l = true if (load+inc+reset), else false
+    Or(a=load,b=inc,out=or1);
+    Or(a=or1,b=reset,out=l);
+
+    //i = 0 if reset, in(t-1) elif load, out(t-1)+1 elif inc
+    Inc16(in=lastout,out=incout); 
+    Mux16(a=true,b=incout,sel=inc,out=i1);
+    Mux16(a=i1,b=in,sel=load,out=i2);
+    Mux16(a=i2,b=false,sel=reset,out=i);
+    Register(in=i,load=l,out=out,out=lastout);
 }

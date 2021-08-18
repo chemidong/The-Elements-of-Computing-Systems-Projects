@@ -15,7 +15,7 @@ CHIP RAM8 {
     OUT out[16];
 
     PARTS:
-    // Put your code here:
+    // address[0..2] => Register id, na0..2=!address[0..2]
     Not(in=address[0],out=na0);
     Not(in=address[1],out=na1);
     Not(in=address[2],out=na2);
