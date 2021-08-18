@@ -15,7 +15,7 @@ CHIP RAM64 {
     OUT out[16];
 
     PARTS:
-    //address[3..5] => RAM id, na0..2=!addresss[3..5]
+    //address[3..5] => RAM8 id, na0..2=!addresss[3..5]
     Not(in=address[3],out=na0);
     Not(in=address[4],out=na1);
     Not(in=address[5],out=na2);
@@ -24,62 +24,54 @@ CHIP RAM64 {
     And(a=na0,b=na1,out=e0u0);
     And(a=e0u0,b=na2,out=e0);
     And(a=e0,b=load,out=l0);
-    Mux16(a=out0,b=in,sel=e0,out=i0);
-    RAM8(in=i0,load=l0,address=address[0..2],out=out0,out=ram0);
+    RAM8(in=in,load=l0,address=address[0..2],out=ram0);
 
     //RAM8[1]
     And(a=address[3],b=na1,out=e0u1);
     And(a=e0u1,b=na2,out=e1);
     And(a=e1,b=load,out=l1);
-    Mux16(a=out1,b=in,sel=e1,out=i1);
-    RAM8(in=i1,load=l1,address=address[0..2],out=out1);
+    RAM8(in=in,load=l1,address=address[0..2],out=out1);
     Mux16(a=ram0,b=out1,sel=e1,out=ram1);
 
     //RAM8[2]
     And(a=na0,b=address[4],out=e0u2);
     And(a=e0u2,b=na2,out=e2);
     And(a=e2,b=load,out=l2);
-    Mux16(a=out2,b=in,sel=e2,out=i2);
-    RAM8(in=i2,load=l2,address=address[0..2],out=out2);
+    RAM8(in=in,load=l2,address=address[0..2],out=out2);
     Mux16(a=ram1,b=out2,sel=e2,out=ram2);
 
     //RAM8[3]
     And(a=address[3],b=address[4],out=e0u3);
     And(a=e0u3,b=na2,out=e3);
     And(a=e3,b=load,out=l3);
-    Mux16(a=out3,b=in,sel=e3,out=i3);
-    RAM8(in=i3,load=l3,address=address[0..2],out=out3);
+    RAM8(in=in,load=l3,address=address[0..2],out=out3);
     Mux16(a=ram2,b=out3,sel=e3,out=ram3);
 
     //RAM8[4]
     And(a=na0,b=na1,out=e0u4);
     And(a=e0u4,b=address[5],out=e4);
     And(a=e4,b=load,out=l4);
-    Mux16(a=out4,b=in,sel=e4,out=i4);
-    RAM8(in=i4,load=l4,address=address[0..2],out=out4);
+    RAM8(in=in,load=l4,address=address[0..2],out=out4);
     Mux16(a=ram3,b=out4,sel=e4,out=ram4);
 
     //RAM8[5]
     And(a=address[3],b=na1,out=e0u5);
     And(a=e0u5,b=address[5],out=e5);
     And(a=e5,b=load,out=l5);
-    Mux16(a=out5,b=in,sel=e5,out=i5);
-    RAM8(in=i5,load=l5,address=address[0..2],out=out5);
+    RAM8(in=in,load=l5,address=address[0..2],out=out5);
     Mux16(a=ram4,b=out5,sel=e5,out=ram5);
 
     //RAM8[6]
     And(a=na0,b=address[4],out=e0u6);
     And(a=e0u6,b=address[5],out=e6);
     And(a=e6,b=load,out=l6);
-    Mux16(a=out6,b=in,sel=e6,out=i6);
-    RAM8(in=i6,load=l6,address=address[0..2],out=out6);
+    RAM8(in=in,load=l6,address=address[0..2],out=out6);
     Mux16(a=ram5,b=out6,sel=e6,out=ram6);
 
     //RAM8[7]
     And(a=address[3],b=address[4],out=e0u7);
     And(a=e0u7,b=address[5],out=e7);
     And(a=e7,b=load,out=l7);
-    Mux16(a=out7,b=in,sel=e7,out=i7);
-    RAM8(in=i7,load=l7,address=address[0..2],out=out7);
+    RAM8(in=in,load=l7,address=address[0..2],out=out7);
     Mux16(a=ram6,b=out7,sel=e7,out=out);
 }

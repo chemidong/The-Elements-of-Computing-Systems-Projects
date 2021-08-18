@@ -41,14 +41,13 @@ def hdl():
 			else:
 				print(f"And(a=e{j-1}u{i},b={s[j+1]},out=e{i});")
 		print(f"And(a=e{i},b=load,out=l{i});")
-		print(f"Mux16(a=out{i},b=in,sel=e{i},out=i{i});")
 		if i == 0:
-			print(f"Register(in=i{i},load=l{i},out=out{i},out=ram0);")
+			print(f"Register(in=in,load=l{i},out=ram0);")
 		elif i < n-1:
-			print(f"Register(in=i{i},load=l{i},out=out{i});")
+			print(f"Register(in=in,load=l{i},out=out{i});")
 			print(f"Mux16(a=ram{i-1},b=out{i},sel=e{i},out=ram{i});")
 		else:
-			print(f"Register(in=i{i},load=l{i},out=out{i});")
+			print(f"Register(in=in,load=l{i},out=out{i});")
 			print(f"Mux16(a=ram{i-1},b=out{i},sel=e{i},out=out);")
 		print();
 
